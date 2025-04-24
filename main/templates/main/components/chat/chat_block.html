@@ -1,0 +1,31 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/components/chat/chat_block.css' %}">
+
+<div class="chat_blog">
+    <div class="container">
+        <h1 class="chat_title">Enter your topic or idea:</h1>
+    
+        <div class="chat_container">
+            <form method="post" class="chat_form">
+                {% csrf_token %}
+                <textarea name="prompt" class="chat_input" placeholder="For Instance: Write a short story about time travel...">{% if prompt %}{{ prompt }}{% endif %}</textarea>
+                <div class="chat_buttons">
+                    <button type="reset" class="chat_reset">Stop</button>
+                    <button type="submit" class="chat_submit">
+                        <img src="{% static 'vectors/run_icon.svg' %}" alt="Run" class="run_icon">
+                        Run
+                    </button>
+                </div>
+            </form>
+
+            {% if response %}
+                <div class="chat_response">
+                    <h1 class="chat_response_title">Generated Text:</h1>
+                    <div class="chat_response_text">{{ response|linebreaksbr }}</div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
